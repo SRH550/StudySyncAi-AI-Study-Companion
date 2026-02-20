@@ -6,41 +6,34 @@
 
 ---
 
-## 🌟 Key Innovations
+## 🌟 Key Features
 
-- **High-Availability AI Engine**: Built with a **multi-model fallback system** using OpenRouter API (Nemotron-70B, Gemini Pro, Llama 3) to guarantee uninterrupted service and optimal response quality.
-- **Context-Aware Study Chat**: A sophisticated implementation allowing students to query their specific notes with context-accurate AI responses.
-- **Automated Assessment Architect**: Instantly generates structured interactive quizzes from unstructured text, utilizing advanced LLM integration and dynamic schema validation to ensure pedagogical value.
-- **Data-Driven Insights**: A personalized dashboard tracking study streaks, quiz performance, and material mastery using real-time analytics.
-  
+- **Reliable AI Engine**: Built with a fallback system using OpenRouter API (Nemotron-70B, Gemini Pro, Llama 3) to guarantee high availability and optimal response quality.
+- **Study Chat**: Allows students to upload notes and ask context-aware questions directly to the AI.
+- **Easy Quiz Generation**: Instantly generates interactive quizzes from unstructured text to reinforce learning through active recall.
+- **Progress Tracking**: Features a personalized dashboard to track study streaks, quiz performance, and material mastery.
+- **Cloud-Native Deployment**: Engineered for reliability using Vercel (Frontend) and Railway (Backend) with automated CI/CD pipelines.
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js 14**: Server-side rendering and optimized routing.
-- **Tailwind CSS**: Modern, responsive styling with a focus on glassmorphism.
-- **Lucide React**: Premium iconography.
-- **Shadcn/UI**: Accessible and beautiful component library.
+- **Next.js 14**: Optimized React framework for server-side rendering and routing.
+- **Tailwind CSS**: Modern, glassmorphism-focused responsive design.
+- **Shadcn/UI**: High-quality, accessible component library.
 
 ### Backend
 - **Node.js & Express**: Scalable server architecture.
-- **MongoDB**: Robust NoSQL database for flexible data storage.
-- **OpenRouter API**: Access to top-tier AI models (Nemotron, Gemini, Llama).
-- **JWT & Bcrypt**: Secure authentication and password hashing.
-- **Multer & PDF-Parse**: Efficient file processing and text extraction.
+- **MongoDB**: Flexible NoSQL data storage.
+- **OpenRouter API**: Unified gateway for multi-model AI orchestration.
+- **JWT & Bcrypt**: Secure token-based authentication and hashing.
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas Account
-- OpenRouter API Key
-
 ### Installation
+1. Clone the repo: `git clone https://github.com/SRH550/StudySyncAi.git`
+2. Backend: `cd backend && npm install && npm start`
+3. Frontend: `cd frontend && npm install && npm run dev`
 
-1. **Clone the repository**:
-   ```bash
-   git clone [https://github.com/SRH550/StudySyncAi.git](https://github.com/SRH550/StudySyncAi.git)
-   cd StudySyncAi
+---
