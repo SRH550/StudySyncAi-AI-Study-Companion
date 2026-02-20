@@ -14,6 +14,16 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 export default function NotesPage() {
   const [showUpload, setShowUpload] = useState(false)
@@ -25,6 +35,7 @@ export default function NotesPage() {
   const [uploading, setUploading] = useState(false)
   const [summarizingNoteId, setSummarizingNoteId] = useState<string | null>(null)
   const [summaries, setSummaries] = useState<Record<string, string>>({})
+  const [noteToDelete, setNoteToDelete] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -76,13 +87,14 @@ export default function NotesPage() {
     }
   }
 
-  async function handleDeleteNote(id: string) {
-    if (!confirm("Are you sure you want to delete this note?")) return
+  async function handleDeleteNote() {
+    if (!noteToDelete) return
 
     try {
       const api = (await import("@/lib/api")).default
-      await api.delete(`/notes/${id}`)
-      setNotes(notes.filter((note) => note._id !== id))
+      await api.delete(`/notes/${noteToDelete}`)
+      setNotes(notes.filter((note) => note._id !== noteToDelete))
+      setNoteToDelete(null)
     } catch (error) {
       console.error("Failed to delete note", error)
     }
@@ -210,7 +222,7 @@ export default function NotesPage() {
                   <FileText className="h-5 w-5 text-primary" />
                 </div>
                 <button
-                  onClick={() => handleDeleteNote(note._id)}
+                  onClick={() => setNoteToDelete(note._id)}
                   className="text-muted-foreground transition-colors hover:text-destructive"
                   aria-label="Delete note"
                 >
@@ -262,6 +274,26 @@ export default function NotesPage() {
           ))}
         </div>
       )}
+      <AlertDialog open={!!noteToDelete} onOpenChange={(open) => !open && setNoteToDelete(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your note
+              and remove the data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteNote}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              Delete Note
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

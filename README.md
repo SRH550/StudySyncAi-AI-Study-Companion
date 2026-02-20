@@ -17,10 +17,10 @@
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **React/Next.js**: High-performance web framework.
-- **Tailwind CSS**: Modern, responsive styling.
-- **Lucide React**: Sleek iconography.
-- **Axios**: Smooth API communication.
+- **Next.js 14**: Server-side rendering and optimized routing.
+- **Tailwind CSS**: Modern, responsive styling with a focus on glassmorphism.
+- **Lucide React**: Premium iconography.
+- **Shadcn/UI**: Accessible and beautiful component library.
 
 ### Backend
 - **Node.js & Express**: Scalable server architecture.
@@ -29,40 +29,47 @@
 - **JWT & Bcrypt**: Secure authentication and password hashing.
 - **Multer & PDF-Parse**: Efficient file processing and text extraction.
 
-## 🛠️ Local Setup
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js (v18+)
-- MongoDB account
+- Node.js 18+
+- MongoDB Atlas Account
+- OpenRouter API Key
 
 ### Installation
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/SRH550/StudySyncAi-AI-Study-Companion.git
-   cd StudySyncAi-AI-Study-Companion
+   git clone https://github.com/SRH550/StudySyncAi.git
+   cd StudySyncAi
    ```
 
-2. **Backend Setup**:
+2. **Setup Backend**:
    ```bash
    cd backend
    npm install
-   # Create a .env file with:
-   # PORT=5000
-   # MONGO_URI=your_mongodb_uri
-   # JWT_SECRET=your_secret
-   # OPENROUTER_API_KEY=your_key
+   # Create a .env file based on the provided guide
    npm start
    ```
 
-3. **Frontend Setup**:
+3. **Setup Frontend**:
    ```bash
    cd ../frontend
    npm install
-   # Create a .env.local file with:
-   # NEXT_PUBLIC_API_URL=http://localhost:5000
+   # Create a .env.local file with your backend URL
    npm run dev
    ```
 
+---
+
+## 🔒 Security
+This project uses multi-layer `.gitignore` protection to ensure that local secrets, environment variables, and node_modules are never exposed.
+
+---
+
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the ISC License.
+
+Developed by [Shivakoti Raj Harsha](https://github.com/SRH550)
