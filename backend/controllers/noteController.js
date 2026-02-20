@@ -4,18 +4,27 @@ const pdf = require('pdf-parse');
 const AdmZip = require('adm-zip');
 const path = require('path');
 
-const extractDocxText = (filePath) => {
+const extractDocxText = (filePathOrBuffer) => {
     try {
-        const zip = new AdmZip(filePath);
-        const docEntry = zip.getEntry('word/document.xml');
-        if (!docEntry) throw new Error('Not a valid DOCX file');
-        const xml = docEntry.getData().toString('utf8');
-        const matches = xml.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
-        return matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ').replace(/\s+/g, ' ').trim();
-    } catch (err) {
-        if (fs.existsSync(filePath)) {
-            return fs.readFileSync(filePath, 'utf8').trim();
+        let buf;
+        if (Buffer.isBuffer(filePathOrBuffer)) {
+            buf = filePathOrBuffer;
+        } else {
+            buf = fs.readFileSync(filePathOrBuffer);
         }
+
+        if (buf[0] === 0x50 && buf[1] === 0x4B) {
+            const zip = new AdmZip(buf);
+            const docEntry = zip.getEntry('word/document.xml');
+            if (!docEntry) throw new Error('Not a valid DOCX file (missing word/document.xml)');
+            const xml = docEntry.getData().toString('utf8');
+            const matches = xml.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
+            return matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ').replace(/\s+/g, ' ').trim();
+        } else {
+            return buf.toString('utf8').trim();
+        }
+    } catch (err) {
+        console.error('DOCX extraction failed:', err.message);
         return '';
     }
 };

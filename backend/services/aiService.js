@@ -11,7 +11,7 @@ const MODELS = [
 ];
 
 const callOpenRouter = async (messages) => {
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    const OPENROUTER_API_KEY = (process.env.OPENROUTER_API_KEY || '').trim();
     if (!OPENROUTER_API_KEY) {
         throw new Error('OPENROUTER_API_KEY is missing in environment variables');
     }

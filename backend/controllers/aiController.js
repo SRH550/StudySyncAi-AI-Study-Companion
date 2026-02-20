@@ -4,13 +4,19 @@ const ChatHistory = require('../models/ChatHistory');
 const fs = require('fs');
 const pdf = require('pdf-parse');
 const AdmZip = require('adm-zip');
+const axios = require('axios'); // Added axios for remote file fetching
 
-const extractDocxText = (filePath) => {
+const extractDocxText = (filePathOrBuffer) => {
     try {
-        const buf = fs.readFileSync(filePath);
+        let buf;
+        if (Buffer.isBuffer(filePathOrBuffer)) {
+            buf = filePathOrBuffer;
+        } else {
+            buf = fs.readFileSync(filePathOrBuffer);
+        }
 
         if (buf[0] === 0x50 && buf[1] === 0x4B) {
-            const zip = new AdmZip(filePath);
+            const zip = new AdmZip(buf);
             const docEntry = zip.getEntry('word/document.xml');
             if (!docEntry) throw new Error('Not a valid DOCX file (missing word/document.xml)');
             const xml = docEntry.getData().toString('utf8');
@@ -33,13 +39,22 @@ const extractNoteContent = async (note) => {
     if (!note.fileUrl) return '';
 
     try {
-        if (!fs.existsSync(note.fileUrl)) {
-            console.error(`File path does not exist: ${note.fileUrl}`);
-            return '';
+        let dataBuffer;
+        const isRemote = note.fileUrl.startsWith('http');
+
+        if (isRemote) {
+            console.log(`[extract] Fetching remote file: ${note.fileUrl}`);
+            const response = await axios.get(note.fileUrl, { responseType: 'arraybuffer' });
+            dataBuffer = Buffer.from(response.data);
+        } else {
+            if (!fs.existsSync(note.fileUrl)) {
+                console.error(`File path does not exist: ${note.fileUrl}`);
+                return '';
+            }
+            dataBuffer = fs.readFileSync(note.fileUrl);
         }
 
         if (note.mimeType === 'application/pdf' || note.fileUrl.toLowerCase().endsWith('.pdf')) {
-            const dataBuffer = fs.readFileSync(note.fileUrl);
             const data = await pdf(dataBuffer);
             const extracted = data.text.trim();
             note.content = extracted;
@@ -50,12 +65,12 @@ const extractNoteContent = async (note) => {
             note.mimeType === 'application/msword' ||
             note.fileUrl.toLowerCase().endsWith('.docx') || note.fileUrl.toLowerCase().endsWith('.doc')
         ) {
-            const extracted = extractDocxText(note.fileUrl);
+            const extracted = extractDocxText(dataBuffer);
             note.content = extracted;
             await note.save();
             return extracted;
         } else if (note.mimeType === 'text/plain' || note.fileUrl.toLowerCase().endsWith('.txt')) {
-            const extracted = fs.readFileSync(note.fileUrl, 'utf8').trim();
+            const extracted = dataBuffer.toString('utf8').trim();
             note.content = extracted;
             await note.save();
             return extracted;
