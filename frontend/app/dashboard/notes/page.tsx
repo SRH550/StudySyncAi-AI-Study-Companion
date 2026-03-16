@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import ReactMarkdown from "react-markdown"
 import {
   FileText,
   Plus,
@@ -128,7 +129,7 @@ export default function NotesPage() {
           </p>
         </div>
         <Button
-          className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+          className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-sm"
           onClick={() => setShowUpload(!showUpload)}
         >
           {showUpload ? <X className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
@@ -137,7 +138,7 @@ export default function NotesPage() {
       </div>
 
       {showUpload && (
-        <div className="mb-8 rounded-2xl border-2 border-dashed border-primary/30 bg-primary/5 p-8 transition-all">
+        <div className="mb-8 rounded-2xl border border-border bg-white p-8 shadow-sm">
           <form onSubmit={handleCreateNote} className="mx-auto max-w-2xl flex flex-col gap-4">
             <h3 className="text-lg font-semibold text-foreground text-center mb-4">
               Add a New Note
@@ -146,16 +147,16 @@ export default function NotesPage() {
               placeholder="Note Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="bg-background"
+              className="bg-secondary border-border"
               required
             />
 
             <div
-              className="flex items-center gap-4 rounded-lg border border-border/50 bg-background p-3 cursor-pointer hover:border-primary/50"
+              className="flex items-center gap-4 rounded-lg border border-dashed border-border bg-secondary p-3 cursor-pointer hover:border-primary/50 transition-colors"
               onClick={() => fileInputRef.current?.click()}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
-                <Upload className="h-5 w-5 text-muted-foreground" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                <Upload className="h-5 w-5 text-primary" />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-foreground">
@@ -195,9 +196,9 @@ export default function NotesPage() {
               placeholder="Or paste your note content here..."
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="bg-background min-h-[150px]"
+              className="bg-secondary border-border min-h-[150px]"
             />
-            <Button type="submit" disabled={uploading} className="w-full">
+            <Button type="submit" disabled={uploading} className="w-full bg-primary text-white hover:bg-primary/90">
               {uploading ? "Saving..." : "Save Note"}
             </Button>
           </form>
@@ -205,7 +206,7 @@ export default function NotesPage() {
       )}
 
       {loading ? (
-        <div className="text-center py-10">Loading notes...</div>
+        <div className="text-center py-10 text-muted-foreground">Loading notes...</div>
       ) : notes.length === 0 ? (
         <div className="text-center py-10 text-muted-foreground">No notes found. Create one to get started!</div>
       ) : (
@@ -213,9 +214,9 @@ export default function NotesPage() {
           {notes.map((note) => (
             <div
               key={note._id}
-              className="glass group relative overflow-hidden rounded-xl border border-border/50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:glow-sm"
+              className="group relative overflow-hidden rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary to-accent opacity-0 transition-opacity group-hover:opacity-100 rounded-t-xl" />
 
               <div className="mb-4 flex items-start justify-between">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
@@ -235,7 +236,7 @@ export default function NotesPage() {
               </h3>
 
               {note.originalName && (
-                <div className="mb-2 flex items-center gap-1 text-xs text-primary/80 bg-primary/5 p-1 rounded">
+                <div className="mb-2 flex items-center gap-1 text-xs text-primary bg-primary/5 p-1.5 rounded-md">
                   <FileIcon className="h-3 w-3" />
                   <span className="truncate">{note.originalName}</span>
                 </div>
@@ -256,7 +257,7 @@ export default function NotesPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex-1 gap-1.5 border-border/50 text-xs text-foreground hover:border-primary/30 hover:bg-primary/5"
+                  className="flex-1 gap-1.5 border-border text-xs text-foreground hover:border-primary/30 hover:bg-primary/5"
                   onClick={() => handleSummarize(note)}
                   disabled={summarizingNoteId === note._id}
                 >
@@ -265,9 +266,21 @@ export default function NotesPage() {
                 </Button>
               </div>
               {summaries[note._id] && (
-                <div className="mt-3 rounded-lg bg-primary/5 p-3 text-xs text-muted-foreground border border-primary/10">
+                <div className="mt-3 rounded-lg bg-primary/5 p-3 text-xs text-foreground border border-primary/10">
                   <p className="font-semibold text-primary mb-1">Summary</p>
-                  <p className="whitespace-pre-wrap">{summaries[note._id]}</p>
+                  <div className="prose prose-sm max-w-none text-xs leading-relaxed text-muted-foreground break-words
+                    [&>p]:mb-2 [&>p:last-child]:mb-0
+                    [&>ul]:mb-2 [&>ul]:list-disc [&>ul]:pl-4
+                    [&>ol]:mb-2 [&>ol]:list-decimal [&>ol]:pl-4
+                    [&>li]:mb-1
+                    [&>h1]:text-sm [&>h1]:font-bold [&>h1]:mb-1
+                    [&>h2]:text-xs [&>h2]:font-semibold [&>h2]:mb-1
+                    [&>h3]:text-xs [&>h3]:font-semibold [&>h3]:mb-1
+                    [&>code]:rounded [&>code]:bg-black/5 [&>code]:px-1
+                    [&>pre]:rounded-lg [&>pre]:bg-black/5 [&>pre]:p-2 [&>pre]:overflow-x-auto
+                    [&>strong]:font-semibold [&>em]:italic">
+                    <ReactMarkdown>{summaries[note._id]}</ReactMarkdown>
+                  </div>
                 </div>
               )}
             </div>

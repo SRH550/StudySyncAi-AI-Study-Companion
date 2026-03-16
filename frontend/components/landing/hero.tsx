@@ -8,20 +8,20 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-40 -top-40 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -bottom-20 -right-20 h-80 w-80 animate-pulse rounded-full bg-accent/10 blur-3xl" style={{ animationDelay: "1s" }} />
+        <div className="absolute -left-40 -top-40 h-96 w-96 animate-pulse rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -bottom-20 -right-20 h-80 w-80 animate-pulse rounded-full bg-accent/5 blur-3xl" style={{ animationDelay: "1s" }} />
         <div className="absolute left-1/2 top-1/3 h-64 w-64 animate-pulse rounded-full bg-primary/5 blur-3xl" style={{ animationDelay: "2s" }} />
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(oklch(0.7 0.18 230 / 0.5) 1px, transparent 1px), linear-gradient(90deg, oklch(0.7 0.18 230 / 0.5) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(#6366f1 1px, transparent 1px), linear-gradient(90deg, #6366f1 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
           }}
         />
       </div>
 
       <div className="relative z-10 mx-auto max-w-5xl text-center">
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm text-primary">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm text-primary font-medium">
           <Zap className="h-4 w-4" />
           <span>Powered by Advanced AI</span>
         </div>
@@ -39,7 +39,7 @@ export function Hero() {
           <Link href="/register">
             <Button
               size="lg"
-              className="group h-13 gap-2 bg-primary px-8 text-base font-semibold text-primary-foreground hover:bg-primary/90 glow-md"
+              className="group h-13 gap-2 bg-primary px-8 text-base font-semibold text-white hover:bg-primary/90 shadow-md"
             >
               Get Started Free
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -49,7 +49,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="h-13 border-border/60 px-8 text-base text-foreground hover:border-primary/50 hover:bg-primary/10 hover:text-primary transition-colors"
+              className="h-13 border-border px-8 text-base text-foreground hover:border-primary/50 hover:bg-primary/5 hover:text-primary transition-colors"
             >
               Login to Dashboard
             </Button>
@@ -94,7 +94,7 @@ function FloatingCard({
 }) {
   return (
     <div
-      className="glass group rounded-xl p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:glow-sm"
+      className="group rounded-xl border border-border bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
       style={{ animationDelay: delay }}
     >
       <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-secondary">

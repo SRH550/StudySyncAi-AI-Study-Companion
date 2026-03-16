@@ -108,7 +108,7 @@ export default function QuizPage() {
   if (!quizStarted) {
     return (
       <div className="mx-auto max-w-xl py-12">
-        <div className="glass rounded-2xl border border-border/50 p-8 glow-sm text-center">
+        <div className="rounded-2xl border border-border bg-white p-8 shadow-sm text-center">
           <div className="mb-6 mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
             <Sparkles className="h-8 w-8 text-primary" />
           </div>
@@ -122,13 +122,14 @@ export default function QuizPage() {
                 placeholder="e.g. Mathematics, Physics, Chemistry..."
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
+                className="bg-secondary border-border"
               />
             </div>
 
             <div className="space-y-2">
               <Label>Difficulty</Label>
               <Select value={difficulty} onValueChange={setDifficulty}>
-                <SelectTrigger>
+                <SelectTrigger className="bg-secondary border-border">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -142,7 +143,7 @@ export default function QuizPage() {
             <Button
               onClick={startQuiz}
               disabled={!topic || loading}
-              className="mt-4 h-12 gap-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+              className="mt-4 h-12 gap-2 bg-primary text-white hover:bg-primary/90 shadow-sm"
             >
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
               {loading ? "Generating Quiz..." : "Generate Quiz"}
@@ -157,7 +158,7 @@ export default function QuizPage() {
     const percentage = Math.round((score / questions.length) * 100)
     return (
       <div className="mx-auto flex max-w-2xl flex-col items-center justify-center py-16 text-center">
-        <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 glow-lg">
+        <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 shadow-lg">
           <Trophy className="h-10 w-10 text-primary" />
         </div>
         <h1 className="mb-2 text-4xl font-bold text-foreground">Quiz Complete!</h1>
@@ -165,7 +166,7 @@ export default function QuizPage() {
           Topic: <span className="font-semibold text-foreground">{topic}</span> ({difficulty})
         </p>
 
-        <div className="glass mb-8 w-full max-w-sm rounded-2xl border border-primary/20 p-8 glow-sm">
+        <div className="mb-8 w-full max-w-sm rounded-2xl border border-border bg-white p-8 shadow-sm">
           <div className="mb-4 text-6xl font-bold gradient-text">{percentage}%</div>
           <p className="mb-2 text-lg text-foreground">
             {score} out of {questions.length} correct
@@ -181,7 +182,7 @@ export default function QuizPage() {
 
         <Button
           onClick={handleRestart}
-          className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+          className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-sm"
         >
           <RotateCcw className="h-4 w-4" />
           Create New Quiz
@@ -205,7 +206,7 @@ export default function QuizPage() {
         <Progress value={progress} className="h-2 bg-secondary [&>div]:bg-primary" />
       </div>
 
-      <div className="glass rounded-2xl border border-border/50 p-8 glow-sm">
+      <div className="rounded-2xl border border-border bg-white p-8 shadow-sm">
         <h2 className="mb-8 text-xl font-semibold leading-relaxed text-foreground md:text-2xl">
           {currentQuestion.question}
         </h2>
@@ -225,27 +226,27 @@ export default function QuizPage() {
                 className={cn(
                   "flex items-center gap-4 rounded-xl border p-4 text-left transition-all duration-200",
                   !answered && isSelected
-                    ? "border-primary/50 bg-primary/10 text-foreground"
+                    ? "border-primary bg-primary/5 text-foreground shadow-sm"
                     : !answered
-                      ? "border-border/50 bg-secondary/30 text-foreground hover:border-primary/30 hover:bg-secondary/50"
+                      ? "border-border bg-secondary/50 text-foreground hover:border-primary/30 hover:bg-secondary"
                       : showCorrect
-                        ? "border-accent/50 bg-accent/10 text-foreground"
+                        ? "border-accent bg-accent/5 text-foreground"
                         : showWrong
-                          ? "border-destructive/50 bg-destructive/10 text-foreground"
-                          : "border-border/30 bg-secondary/20 text-muted-foreground"
+                          ? "border-destructive bg-destructive/5 text-foreground"
+                          : "border-border/50 bg-secondary/30 text-muted-foreground"
                 )}
               >
                 <div
                   className={cn(
                     "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-sm font-semibold",
                     !answered && isSelected
-                      ? "bg-primary/20 text-primary"
+                      ? "bg-primary/10 text-primary"
                       : !answered
                         ? "bg-secondary text-muted-foreground"
                         : showCorrect
-                          ? "bg-accent/20 text-accent"
+                          ? "bg-accent/10 text-accent"
                           : showWrong
-                            ? "bg-destructive/20 text-destructive"
+                            ? "bg-destructive/10 text-destructive"
                             : "bg-secondary text-muted-foreground"
                   )}
                 >
@@ -268,7 +269,7 @@ export default function QuizPage() {
             <Button
               onClick={handleCheck}
               disabled={selected === null}
-              className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+              className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-sm"
             >
               Check Answer
               <CheckCircle2 className="h-4 w-4" />
@@ -276,7 +277,7 @@ export default function QuizPage() {
           ) : (
             <Button
               onClick={handleNext}
-              className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+              className="gap-2 bg-primary text-white hover:bg-primary/90 shadow-sm"
             >
               {currentQ < questions.length - 1 ? "Next Question" : "See Results"}
               <ArrowRight className="h-4 w-4" />

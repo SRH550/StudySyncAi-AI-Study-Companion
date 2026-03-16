@@ -22,12 +22,12 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
   }, [])
 
   return (
-    <header className="flex items-center justify-between border-b border-border/50 bg-background/80 px-6 py-4 backdrop-blur-md">
+    <header className="flex items-center justify-between border-b border-border bg-white px-6 py-4">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
           size="icon"
-          className="text-muted-foreground lg:hidden"
+          className="text-muted-foreground hover:text-foreground hover:bg-secondary lg:hidden"
           onClick={onMenuClick}
           aria-label="Toggle sidebar"
         >
@@ -38,7 +38,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search notes, quizzes..."
-            className="h-10 w-72 border-border/50 bg-secondary/50 pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary"
+            className="h-10 w-72 border-border bg-secondary pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="relative text-muted-foreground hover:text-foreground"
+          className="relative text-muted-foreground hover:text-foreground hover:bg-secondary"
           aria-label="Notifications"
         >
           <Bell className="h-5 w-5" />
@@ -56,8 +56,8 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
 
         <div className="flex items-center gap-3">
           <Link href="/dashboard/profile">
-            <Avatar className="h-9 w-9 border border-border/50 transition-transform hover:scale-105 cursor-pointer">
-              <AvatarFallback className="bg-primary/20 text-sm font-semibold text-primary">
+            <Avatar className="h-9 w-9 border border-border transition-transform hover:scale-105 cursor-pointer">
+              <AvatarFallback className="bg-primary/10 text-sm font-semibold text-primary">
                 {user ? user.name.charAt(0).toUpperCase() : "U"}
               </AvatarFallback>
             </Avatar>

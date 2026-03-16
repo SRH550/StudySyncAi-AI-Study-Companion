@@ -29,30 +29,30 @@ export default function ProfilePage() {
   }
 
   if (!user) {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>
+    return <div className="flex h-screen items-center justify-center text-muted-foreground">Loading...</div>
   }
 
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-8 flex items-center gap-4">
         <Link href="/dashboard">
-          <Button variant="ghost" size="icon" className="hover:bg-secondary/50">
+          <Button variant="ghost" size="icon" className="hover:bg-secondary">
             <ArrowLeft className="h-5 w-5" />
           </Button>
         </Link>
         <h1 className="text-3xl font-bold text-foreground">My Profile</h1>
       </div>
 
-      <div className="glass overflow-hidden rounded-2xl border border-border/50">
+      <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
         {/* Banner */}
-        <div className="h-32 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20" />
+        <div className="h-32 bg-gradient-to-r from-primary/20 via-accent/10 to-primary/20" />
 
         <div className="px-8 pb-8">
           {/* Avatar - overlapping banner */}
           <div className="-mt-16 mb-6 flex justify-between items-end">
-            <Avatar className="h-32 w-32 border-4 border-background shadow-xl">
+            <Avatar className="h-32 w-32 border-4 border-white shadow-lg">
               <AvatarImage src="" />
-              <AvatarFallback className="bg-primary text-4xl font-bold text-primary-foreground">
+              <AvatarFallback className="bg-primary text-4xl font-bold text-white">
                 {user.name.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
@@ -69,25 +69,25 @@ export default function ProfilePage() {
           <div className="grid gap-6">
             <div className="grid gap-2">
               <Label className="text-muted-foreground">Full Name</Label>
-              <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-secondary/30 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
                 <User className="h-5 w-5 text-primary" />
-                <span className="font-medium">{user.name}</span>
+                <span className="font-medium text-foreground">{user.name}</span>
               </div>
             </div>
 
             <div className="grid gap-2">
               <Label className="text-muted-foreground">Email Address</Label>
-              <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-secondary/30 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
                 <Mail className="h-5 w-5 text-accent" />
-                <span className="font-medium">{user.email}</span>
+                <span className="font-medium text-foreground">{user.email}</span>
               </div>
             </div>
 
             <div className="grid gap-2">
               <Label className="text-muted-foreground">Member Since</Label>
-              <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-secondary/30 px-4 py-3">
+              <div className="flex items-center gap-3 rounded-xl border border-border bg-secondary px-4 py-3">
                 <Calendar className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">February 2026</span>
+                <span className="font-medium text-foreground">February 2026</span>
               </div>
             </div>
           </div>

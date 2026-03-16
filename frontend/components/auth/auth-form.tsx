@@ -49,14 +49,14 @@ export function AuthForm({ mode }: AuthFormProps) {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center px-6 py-12">
+    <div className="relative flex min-h-screen items-center justify-center px-6 py-12 bg-[#f8fafc]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-40 -top-40 h-96 w-96 animate-pulse rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-96 w-96 animate-pulse rounded-full bg-accent/10 blur-3xl" style={{ animationDelay: "1s" }} />
+        <div className="absolute -left-40 -top-40 h-96 w-96 animate-pulse rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 h-96 w-96 animate-pulse rounded-full bg-accent/5 blur-3xl" style={{ animationDelay: "1s" }} />
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `linear-gradient(oklch(0.7 0.18 230 / 0.5) 1px, transparent 1px), linear-gradient(90deg, oklch(0.7 0.18 230 / 0.5) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(#6366f1 1px, transparent 1px), linear-gradient(90deg, #6366f1 1px, transparent 1px)`,
             backgroundSize: "60px 60px",
           }}
         />
@@ -65,7 +65,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <div className="relative z-10 w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="mb-6 inline-flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 glow-sm">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10">
               <Sparkles className="h-5 w-5 text-primary" />
             </div>
             <span className="text-xl font-bold text-foreground">
@@ -82,10 +82,10 @@ export function AuthForm({ mode }: AuthFormProps) {
           </p>
         </div>
 
-        <div className="glass-strong rounded-2xl p-8">
+        <div className="rounded-2xl border border-border bg-white p-8 shadow-sm">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             {error && (
-              <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+              <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
                 {error}
               </div>
             )}
@@ -100,7 +100,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                   type="text"
                   required
                   placeholder="Enter your name"
-                  className="h-12 border-border/60 bg-secondary/50 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
+                  className="h-12 border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
                 />
               </div>
             )}
@@ -115,7 +115,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                 type="email"
                 required
                 placeholder="you@example.com"
-                className="h-12 border-border/60 bg-secondary/50 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
+                className="h-12 border-border bg-secondary text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
               />
             </div>
 
@@ -130,7 +130,7 @@ export function AuthForm({ mode }: AuthFormProps) {
                   type={showPassword ? "text" : "password"}
                   required
                   placeholder="Enter your password"
-                  className="h-12 border-border/60 bg-secondary/50 pr-12 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
+                  className="h-12 border-border bg-secondary pr-12 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-primary/20"
                 />
                 <button
                   type="button"
@@ -147,7 +147,7 @@ export function AuthForm({ mode }: AuthFormProps) {
               type="submit"
               size="lg"
               disabled={loading}
-              className="group mt-2 h-12 w-full gap-2 bg-primary text-base font-semibold text-primary-foreground hover:bg-primary/90 glow-sm"
+              className="group mt-2 h-12 w-full gap-2 bg-primary text-base font-semibold text-white hover:bg-primary/90 shadow-sm"
             >
               {loading ? "Please wait..." : (isLogin ? "Sign In" : "Create Account")}
               {!loading && <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
@@ -155,14 +155,14 @@ export function AuthForm({ mode }: AuthFormProps) {
           </form>
 
           <div className="my-6 flex items-center gap-4">
-            <div className="h-px flex-1 bg-border/50" />
+            <div className="h-px flex-1 bg-border" />
             <span className="text-xs text-muted-foreground">or</span>
-            <div className="h-px flex-1 bg-border/50" />
+            <div className="h-px flex-1 bg-border" />
           </div>
 
           <Button
             variant="outline"
-            className="h-12 w-full border-border/60 text-foreground hover:bg-secondary"
+            className="h-12 w-full border-border text-foreground hover:bg-secondary"
           >
             <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
               <path

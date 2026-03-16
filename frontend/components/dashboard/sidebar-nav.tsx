@@ -34,28 +34,28 @@ export function SidebarNav({ open, onClose }: SidebarNavProps) {
     <>
       {open && (
         <div
-          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
           onClick={onClose}
         />
       )}
 
       <aside
         className={cn(
-          "fixed left-0 top-0 z-50 flex h-screen w-72 flex-col border-r border-sidebar-border bg-sidebar transition-transform duration-300 lg:static lg:translate-x-0",
+          "fixed left-0 top-0 z-50 flex h-screen w-72 flex-col border-r border-border bg-white transition-transform duration-300 lg:static lg:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex items-center justify-between px-6 py-6">
           <Link href="/dashboard" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/20 glow-sm">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
               <Sparkles className="h-5 w-5 text-primary" />
             </div>
-            <span className="text-lg font-bold text-sidebar-foreground">
+            <span className="text-lg font-bold text-foreground">
               StudySync <span className="gradient-text">AI</span>
             </span>
           </Link>
           <button
-            className="text-sidebar-foreground lg:hidden"
+            className="text-muted-foreground hover:text-foreground lg:hidden"
             onClick={onClose}
             aria-label="Close sidebar"
           >
@@ -75,14 +75,14 @@ export function SidebarNav({ open, onClose }: SidebarNavProps) {
                     className={cn(
                       "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "bg-sidebar-primary/15 text-sidebar-primary glow-sm"
-                        : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                        ? "bg-primary/10 text-primary shadow-sm"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                     )}
                   >
-                    <item.icon className={cn("h-5 w-5", isActive && "text-sidebar-primary")} />
+                    <item.icon className={cn("h-5 w-5", isActive && "text-primary")} />
                     {item.label}
                     {isActive && (
-                      <div className="ml-auto h-1.5 w-1.5 rounded-full bg-sidebar-primary" />
+                      <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
                     )}
                   </Link>
                 </li>
@@ -91,10 +91,10 @@ export function SidebarNav({ open, onClose }: SidebarNavProps) {
           </ul>
         </nav>
 
-        <div className="border-t border-sidebar-border px-4 py-4">
+        <div className="border-t border-border px-4 py-4">
           <Link
             href="/"
-            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+            className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
           >
             <LogOut className="h-5 w-5" />
             Logout

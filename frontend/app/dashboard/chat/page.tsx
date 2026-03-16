@@ -113,7 +113,7 @@ export default function ChatPage() {
 
   return (
     <div className="mx-auto flex h-[calc(100vh-7rem)] max-w-7xl gap-4">
-      <div className="hidden w-64 flex-shrink-0 rounded-xl border border-border/50 bg-card p-4 lg:block">
+      <div className="hidden w-64 flex-shrink-0 rounded-xl border border-border bg-white p-4 shadow-sm lg:block">
         <h3 className="mb-4 text-sm font-semibold text-foreground">My Notes Context</h3>
         <div className="flex flex-col gap-1">
           {notes.length === 0 ? (
@@ -126,8 +126,8 @@ export default function ChatPage() {
                 className={cn(
                   "flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm transition-all",
                   selectedNote === note._id
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
                 <FileText className="h-4 w-4 flex-shrink-0" />
@@ -138,8 +138,8 @@ export default function ChatPage() {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col rounded-xl border border-border/50 bg-card">
-        <div className="flex items-center gap-3 border-b border-border/50 px-5 py-3">
+      <div className="flex flex-1 flex-col rounded-xl border border-border bg-white shadow-sm overflow-hidden min-w-0">
+        <div className="flex items-center gap-3 border-b border-border px-5 py-3">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
             <Sparkles className="h-4 w-4 text-primary" />
           </div>
@@ -151,8 +151,8 @@ export default function ChatPage() {
           </div>
         </div>
 
-        <ScrollArea className="flex-1 p-5" ref={scrollRef}>
-          <div className="flex flex-col gap-5">
+        <ScrollArea className="flex-1 min-h-0 p-5">
+          <div className="flex flex-col gap-5" ref={scrollRef}>
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -163,7 +163,7 @@ export default function ChatPage() {
               >
                 <div
                   className={cn(
-                    "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg",
+                    "flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full",
                     msg.role === "ai"
                       ? "bg-primary/10"
                       : "bg-accent/10"
@@ -177,14 +177,14 @@ export default function ChatPage() {
                 </div>
                 <div
                   className={cn(
-                    "max-w-[75%] rounded-2xl px-4 py-3",
+                    "max-w-[75%] rounded-2xl px-4 py-3 overflow-hidden",
                     msg.role === "ai"
-                      ? "bg-secondary/50 text-foreground"
-                      : "bg-primary/15 text-foreground"
+                      ? "bg-secondary text-foreground"
+                      : "bg-primary text-white"
                   )}
                 >
                   {msg.role === "ai" ? (
-                    <div className="prose prose-sm prose-invert max-w-none text-sm leading-relaxed
+                    <div className="prose prose-sm max-w-none text-sm leading-relaxed text-foreground break-words
                       [&>p]:mb-2 [&>p:last-child]:mb-0
                       [&>ul]:mb-2 [&>ul]:list-disc [&>ul]:pl-4
                       [&>ol]:mb-2 [&>ol]:list-decimal [&>ol]:pl-4
@@ -192,8 +192,8 @@ export default function ChatPage() {
                       [&>h1]:text-base [&>h1]:font-bold [&>h1]:mb-2
                       [&>h2]:text-sm [&>h2]:font-semibold [&>h2]:mb-1
                       [&>h3]:text-sm [&>h3]:font-semibold [&>h3]:mb-1
-                      [&>code]:rounded [&>code]:bg-black/30 [&>code]:px-1 [&>code]:text-xs
-                      [&>pre]:rounded-lg [&>pre]:bg-black/30 [&>pre]:p-3 [&>pre]:text-xs [&>pre]:overflow-x-auto
+                      [&>code]:rounded [&>code]:bg-black/5 [&>code]:px-1 [&>code]:text-xs
+                      [&>pre]:rounded-lg [&>pre]:bg-black/5 [&>pre]:p-3 [&>pre]:text-xs [&>pre]:overflow-x-auto
                       [&>strong]:font-semibold [&>em]:italic">
                       <ReactMarkdown>{msg.content}</ReactMarkdown>
                     </div>
@@ -202,7 +202,10 @@ export default function ChatPage() {
                       {msg.content}
                     </p>
                   )}
-                  <span className="mt-1 block text-[10px] text-muted-foreground">
+                  <span className={cn(
+                    "mt-1 block text-[10px]",
+                    msg.role === "ai" ? "text-muted-foreground" : "text-white/70"
+                  )}>
                     {msg.timestamp}
                   </span>
                 </div>
@@ -210,10 +213,10 @@ export default function ChatPage() {
             ))}
             {isTyping && (
               <div className="flex gap-3">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10">
                   <Sparkles className="h-4 w-4 text-primary" />
                 </div>
-                <div className="bg-secondary/50 rounded-2xl px-4 py-3">
+                <div className="bg-secondary rounded-2xl px-4 py-3">
                   <p className="text-sm text-muted-foreground">AI is thinking...</p>
                 </div>
               </div>
@@ -221,12 +224,12 @@ export default function ChatPage() {
           </div>
         </ScrollArea>
 
-        <div className="border-t border-border/50 p-4">
+        <div className="border-t border-border p-4">
 
           {file && (
-            <div className="mb-2 flex items-center gap-2 rounded-lg bg-secondary/50 p-2 text-sm">
+            <div className="mb-2 flex items-center gap-2 rounded-lg bg-secondary p-2 text-sm">
               <FileText className="h-4 w-4 text-primary" />
-              <span className="flex-1 truncate">{file.name}</span>
+              <span className="flex-1 truncate text-foreground">{file.name}</span>
               <button onClick={() => setFile(null)} className="text-muted-foreground hover:text-destructive">
                 <X className="h-4 w-4" />
               </button>
@@ -248,7 +251,7 @@ export default function ChatPage() {
             <Button
               variant="ghost"
               size="icon"
-              className="flex-shrink-0 text-muted-foreground hover:text-foreground"
+              className="flex-shrink-0 text-muted-foreground hover:text-foreground hover:bg-secondary"
               aria-label="Attach file"
               onClick={() => fileInputRef.current?.click()}
             >
@@ -267,13 +270,13 @@ export default function ChatPage() {
                 placeholder={file ? "Ask about this file..." : "Ask about your notes..."}
                 rows={1}
                 disabled={isTyping}
-                className="w-full resize-none rounded-xl border border-border/50 bg-secondary/50 px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
+                className="w-full resize-none rounded-xl border border-border bg-secondary px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
               />
             </div>
             <Button
               onClick={handleSend}
               size="icon"
-              className="flex-shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 glow-sm"
+              className="flex-shrink-0 bg-primary text-white hover:bg-primary/90 shadow-sm"
               disabled={(!input.trim() && !file) || isTyping}
               aria-label="Send message"
             >

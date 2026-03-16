@@ -49,7 +49,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="relative px-6 py-32">
+    <section className="relative px-6 py-32 bg-secondary/50">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/4 top-0 h-64 w-64 animate-pulse rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute bottom-0 right-1/4 h-64 w-64 animate-pulse rounded-full bg-accent/5 blur-3xl" style={{ animationDelay: "1.5s" }} />
@@ -73,9 +73,9 @@ export function Features() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="glass group relative overflow-hidden rounded-xl p-8 transition-all duration-300 hover:-translate-y-1 hover:glow-sm"
+              className="group relative overflow-hidden rounded-xl border border-border bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute left-0 right-0 top-0 h-1 bg-gradient-to-r from-primary to-accent opacity-0 transition-opacity group-hover:opacity-100 rounded-t-xl" />
 
               <div className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl ${feature.bgColor}`}>
                 <feature.icon className={`h-6 w-6 ${feature.color}`} />

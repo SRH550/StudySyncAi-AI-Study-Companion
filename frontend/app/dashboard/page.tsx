@@ -54,7 +54,7 @@ export default function DashboardPage() {
       icon: FileText,
       color: "text-primary",
       bgColor: "bg-primary/10",
-      borderColor: "border-primary/20",
+      borderColor: "border-l-primary",
     },
     {
       label: "AI Chats",
@@ -63,7 +63,7 @@ export default function DashboardPage() {
       icon: MessageSquare,
       color: "text-accent",
       bgColor: "bg-accent/10",
-      borderColor: "border-accent/20",
+      borderColor: "border-l-accent",
     },
     {
       label: "Quiz Score",
@@ -72,7 +72,7 @@ export default function DashboardPage() {
       icon: HelpCircle,
       color: "text-primary",
       bgColor: "bg-primary/10",
-      borderColor: "border-primary/20",
+      borderColor: "border-l-primary",
     },
     {
       label: "Study Streak",
@@ -81,7 +81,7 @@ export default function DashboardPage() {
       icon: Flame,
       color: "text-accent",
       bgColor: "bg-accent/10",
-      borderColor: "border-accent/20",
+      borderColor: "border-l-accent",
     },
   ]
 
@@ -109,7 +109,7 @@ export default function DashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className={`group glass relative overflow-hidden rounded-xl border ${stat.borderColor} p-6 transition-all duration-300 hover:-translate-y-0.5 hover:glow-sm`}
+            className={`group relative overflow-hidden rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md border-l-4 ${stat.borderColor}`}
           >
             <div className="flex items-start justify-between">
               <div>
@@ -129,7 +129,7 @@ export default function DashboardPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div className="glass rounded-xl border border-border/50 p-6 lg:col-span-2">
+        <div className="rounded-xl border border-border bg-white p-6 shadow-sm lg:col-span-2">
           <div className="mb-5 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-foreground">Recent Activity</h2>
             <span className="text-xs text-muted-foreground">Last 5 items</span>
@@ -143,7 +143,7 @@ export default function DashboardPage() {
                 return (
                   <div
                     key={i}
-                    className="flex items-center gap-4 rounded-lg bg-secondary/30 p-3 transition-colors hover:bg-secondary/50"
+                    className="flex items-center gap-4 rounded-lg bg-secondary p-3 transition-colors hover:bg-secondary/80"
                   >
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
                       <Icon className="h-4 w-4 text-primary" />
@@ -165,13 +165,13 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="glass rounded-xl border border-border/50 p-6">
+        <div className="rounded-xl border border-border bg-white p-6 shadow-sm">
           <h2 className="mb-5 text-lg font-semibold text-foreground">Quick Actions</h2>
           <div className="flex flex-col gap-3">
             <Link href="/dashboard/notes">
               <Button
                 variant="outline"
-                className="group h-12 w-full justify-start gap-3 border-border/50 text-foreground hover:border-primary/30 hover:bg-primary/5"
+                className="group h-12 w-full justify-start gap-3 border-border text-foreground hover:border-primary/30 hover:bg-primary/5"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                   <Plus className="h-4 w-4 text-primary" />
@@ -183,7 +183,7 @@ export default function DashboardPage() {
             <Link href="/dashboard/chat">
               <Button
                 variant="outline"
-                className="group h-12 w-full justify-start gap-3 border-border/50 text-foreground hover:border-accent/30 hover:bg-accent/5"
+                className="group h-12 w-full justify-start gap-3 border-border text-foreground hover:border-accent/30 hover:bg-accent/5"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
                   <MessageSquare className="h-4 w-4 text-accent" />
@@ -195,7 +195,7 @@ export default function DashboardPage() {
             <Link href="/dashboard/quiz">
               <Button
                 variant="outline"
-                className="group h-12 w-full justify-start gap-3 border-border/50 text-foreground hover:border-primary/30 hover:bg-primary/5"
+                className="group h-12 w-full justify-start gap-3 border-border text-foreground hover:border-primary/30 hover:bg-primary/5"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
                   <HelpCircle className="h-4 w-4 text-primary" />

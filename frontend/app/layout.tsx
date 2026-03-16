@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1a1a2e',
+  themeColor: '#f8fafc',
   userScalable: true,
 }
 
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body suppressHydrationWarning className={`${_inter.variable} ${_geistMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />
